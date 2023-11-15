@@ -1,31 +1,37 @@
 
 <template>
-   
   <div id="app">
+
     <head>
       <title>快点开源软件趋势</title>
     </head>
     <header>
-  <div class="nav-left">
-    <h1>快点开源软件趋势</h1>
-  </div>
-  <nav class="nav-right">
-    <ul>
-      <li><router-link class="nav-link" to="/">首页</router-link></li>
-      <li><a class="nav-link" href="#TrendingRepos">热门仓库</a></li>
-      <li><a class="nav-link" href="#HotCollections">热门收藏</a></li>
-    </ul>
-  </nav>
-</header>
+      <el-menu :default-active="activeIndex" class="el-menu" mode="horizontal" :ellipsis="false"
+        @select="handleSelect">
+        <el-menu-item index="0">
+          <h1>快点开源软件趋势</h1>
+        </el-menu-item>
+        <div class="flex-grow"/>
+        <el-menu-item index="1">首页</el-menu-item>
+        <el-menu-item index="2"><a class="nav-link" href="#TrendingRepos">热门仓库</a></el-menu-item>
+        <el-menu-item index="3"><a class="nav-link" href="#HotCollections">热门收藏</a></el-menu-item>
+      </el-menu>
+    </header>
 
     <main>
+      <el-carousel indicator-position="outside">
+        <el-carousel-item v-for="item in items" :key="item.id" :style="`background-image: url(${item.imageUrl}); background-size: cover;  background-position: center;`">
+  <!-- <h3>{{ item.text }}</h3> -->
+</el-carousel-item>
+  </el-carousel>
       <TrendingRepos id="TrendingRepos" />
-      <HotCollections id="HotCollections"/>
+      <HotCollections id="HotCollections" />
     </main>
     <footer>
       <p>© 2023 HuanGeTech</p>
     </footer>
   </div>
+  <el-backtop :right="50" :bottom="100" />
 </template>
 
 <script>
@@ -37,7 +43,20 @@ export default {
   components: {
     TrendingRepos,
     HotCollections
+  },  
+  data() {
+    return {
+      items: [] // 定义一个空数组
+    };
   },
+  created() {
+    // 在created钩子函数中为slides数组赋值
+    this.items = [
+      { text: '幻灯片1', id: 1 ,imageUrl:"http://photocdn.tv.sohu.com/img/20230509/pic_org_d85af957-ddac-4ab4-a7d3-9a4ad1551fdc.png"},
+      { text: '幻灯片2', id: 2 ,imageUrl:"http://photocdn.tv.sohu.com/img/20230511/pic_org_cbb248c4-5f6d-4400-b82e-56aa14a655a6.png"},
+      { text: '幻灯片3', id: 3 ,imageUrl:"http://photocdn.tv.sohu.com/img/q_mini/20230522/pic_org_90b4b8f8-02f2-4ee8-a273-ae554264f419.png"}
+    ];
+  }
 };
 </script>
 
@@ -47,22 +66,6 @@ export default {
   margin: 20px;
 }
 
-header {
-  background-color: #f8f8f8;
-  padding: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.nav-left {
-  display: flex;
-  align-items: center;
-}
-
-.nav-right {
-  margin-left: 20px;
-}
 
 footer {
   text-align: center;
@@ -99,7 +102,8 @@ h2 {
   font-size: 24px;
   margin-bottom: 10px;
 }
-a.link{
+
+a.nav-link {
   text-decoration: none;
 }
 
@@ -107,38 +111,30 @@ p {
   color: #586069;
   margin-bottom: 10px;
 }
-p.language{
-    color: #fff;
-    background-color: #6c757d;
-    display: inline-block;
-    padding: 0.25em 0.4em;
-    font-size: 75%;
-    font-weight: 700;
-    line-height: 1;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: baseline;
-    border-radius: 0.25rem;
-    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-}
-.nav-link {
-  display: inline-block;
-  margin-right: 10px;
-  padding: 10px;
-  color: #333;
-  text-decoration: none;
-}
 
-.nav-link:hover {
-  background-color: #eee;
+p.language {
+  color: #fff;
+  background-color: #6c757d;
+  display: inline-block;
+  padding: 0.25em 0.4em;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.25rem;
+  transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
-ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.flex-grow {
+  flex-grow: 1;
+
 }
-ul>li{
-  float: left;
-}
+</style>
+
+
+<style scoped>
+
+
 
 </style>
