@@ -1,6 +1,7 @@
 <template>
   <div>
-    <h1>Trending Repos</h1>
+    <h1>🔥 热门仓库</h1>
+    <p>我们将所有仓库根据得分进行排名。总得分 = 星标得分 + 分支得分 + 基础得分。</p>
     <div>
       <label>时间段：</label>
       <select v-model="selectedPeriod" @change="fetchTrendingRepos">
@@ -57,7 +58,8 @@
       </select>
     </div>
     <div class="card-container">
-      <div v-for="repo in trendingRepos" :key="repo.repo_id" class="card">
+      <div v-for="(repo, index) in trendingRepos" :key="repo.repo_id" class="card">
+        <h3># {{ index+1 }}</h3>
         <a :href="'https://github.com/' + repo.repo_name" class="link">
           <h2>{{ repo.repo_name }}</h2>
         </a>

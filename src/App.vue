@@ -1,11 +1,26 @@
 
 <template>
+   
   <div id="app">
+    <head>
+      <title>快点开源软件趋势</title>
+    </head>
     <header>
-      <h1>开源软件趋势</h1>
-    </header>
+  <div class="nav-left">
+    <h1>快点开源软件趋势</h1>
+  </div>
+  <nav class="nav-right">
+    <ul>
+      <li><router-link class="nav-link" to="/">首页</router-link></li>
+      <li><a class="nav-link" href="#TrendingRepos">热门仓库</a></li>
+      <li><a class="nav-link" href="#HotCollections">热门收藏</a></li>
+    </ul>
+  </nav>
+</header>
+
     <main>
-      <TrendingRepos />
+      <TrendingRepos id="TrendingRepos" />
+      <HotCollections id="HotCollections"/>
     </main>
     <footer>
       <p>© 2023 HuanGeTech</p>
@@ -14,12 +29,14 @@
 </template>
 
 <script>
-import TrendingRepos from './Trending.vue';
+import TrendingRepos from './components/Trending.vue';
+import HotCollections from './components/HotCollections.vue';
 
 export default {
   name: 'App',
   components: {
     TrendingRepos,
+    HotCollections
   },
 };
 </script>
@@ -31,8 +48,20 @@ export default {
 }
 
 header {
-  text-align: center;
-  margin-bottom: 20px;
+  background-color: #f8f8f8;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav-left {
+  display: flex;
+  align-items: center;
+}
+
+.nav-right {
+  margin-left: 20px;
 }
 
 footer {
@@ -92,4 +121,24 @@ p.language{
     border-radius: 0.25rem;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
+.nav-link {
+  display: inline-block;
+  margin-right: 10px;
+  padding: 10px;
+  color: #333;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  background-color: #eee;
+}
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+ul>li{
+  float: left;
+}
+
 </style>
